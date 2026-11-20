@@ -12,7 +12,14 @@
             let nazwa = $("#nazwa").val().trim()
             let ilosc = $("#ilosc").val()
 
-            $("#lista").append("<li>" + nazwa + " - " + ilosc + "szt.</li>")
+            
+
+            if(!(nazwa == "" || ilosc <= 0)){
+                $("#lista").append("<li>" + nazwa + " - " + ilosc + "szt.</li>")
+                $("#blad").text("")
+            }else{
+                $("#blad").text("proszę podac nazwę i ilość wiekszą od 0").css("color", "red")
+            }
           })
         });
     </script>
