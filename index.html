@@ -15,7 +15,13 @@
             
 
             if(!(nazwa == "" || ilosc <= 0)){
-                $("#lista").append("<li>" + nazwa + " - " + ilosc + "szt.</li>")
+                let wierszlisty = $("<li>" + nazwa + " - " + ilosc + "szt.</li>")
+                let guzik = $("<button>Usuń</button>")
+                guzik.click(function(){
+                    wierszlisty.remove()
+                })
+                wierszlisty.append(guzik)
+                $("#lista").append(wierszlisty)
                 $("#blad").text("")
             }else{
                 $("#blad").text("proszę podac nazwę i ilość wiekszą od 0").css("color", "red")
