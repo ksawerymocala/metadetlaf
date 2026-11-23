@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"
+        integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
     <script>
-        $(function(){
-          $("#formularz").submit(function(e){
-            e.preventDefault()
-            let nazwa = $("#nazwa").val().trim()
-            let ilosc = $("#ilosc").val()
+        $(function () {
+            $("#formularz").submit(function (e) {
+                e.preventDefault()
+                let nazwa = $("#nazwa").val().trim()
+                let ilosc = $("#ilosc").val()
 
-            
 
-            if(!(nazwa == "" || ilosc <= 0)){
-                let wierszlisty = $("<li>" + nazwa + " - " + ilosc + "szt.</li>")
-                let guzik = $("<button>Usuń</button>")
-                guzik.click(function(){
-                    wierszlisty.remove()
-                })
-                wierszlisty.append(guzik)
-                $("#lista").append(wierszlisty)
-                $("#blad").text("")
-            }else{
-                $("#blad").text("proszę podac nazwę i ilość wiekszą od 0").css("color", "red")
-            }
-          })
+
+                if (!(nazwa == "" || ilosc <= 0)) {
+                    let wierszlisty = $("<li>" + nazwa + " - " + ilosc + "szt.</li>")
+                    let guzik = $("<button>Usuń</button>")
+                    guzik.click(function () {
+                        wierszlisty.remove()
+                    })
+                    wierszlisty.append(guzik)
+                    $("#lista").append(wierszlisty)
+                    $("#blad").text("")
+
+                    wierszlisty.click(function () {
+                        wierszlisty.toggleClass("przekresl")
+                    })
+                } else {
+                    $("#blad").text("proszę podac nazwę i ilość wiekszą od 0").css("color", "red")
+                }
+            })
+
+
+
         });
     </script>
     <style>
+        .przekresl{
+            color: gray;
+            text-decoration: line-through;
+        }
     </style>
 </head>
+
 <body>
     <h1>Lista Zakupów</h1>
     <form id="formularz">
-    <input type="text" id="nazwa" placeholder="Wpisz nazwę">
+        <input type="text" id="nazwa" placeholder="Wpisz nazwę">
 
-    <input type="number" id="ilosc" placeholder="ilosc">
+        <input type="number" id="ilosc" placeholder="ilosc">
 
-    <button type="submit">Dodaj</button>
+        <button type="submit">Dodaj</button>
 
 
-</form>
+    </form>
 
-<p id="blad"></p>
-<p id="licznik">do kupienia: 0, kupione: 0</p>
-<button id="usun">usun kupione</button>
-<p id="pusta">lista pusta</p>
-<ul id="lista"></ul>
+    <p id="blad"></p>
+    <p id="licznik">do kupienia: 0, kupione: 0</p>
+    <button id="usun">usun kupione</button>
+    <p id="pusta">lista pusta</p>
+    <ul id="lista"></ul>
 </body>
+
 </html>
