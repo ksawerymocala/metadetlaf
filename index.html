@@ -26,11 +26,17 @@
                     guzik.click(function () {
                         wierszlisty.remove()
                         $("#licznik").text("do kupienia: " + ($("li").length - $(".przekresl").length) + ", kupione: " + $(".przekresl").length)
+
+                        if($("li").length == 0){
+                    $("#pusta").text("lista pusta")
+                }
                     })
                     wierszlisty.append(guzik)
                     $("#lista").append(wierszlisty)
+                    $("#pusta").text("")
                     $("#licznik").text("do kupienia: " + ($("li").length - $(".przekresl").length) + ", kupione: " + $(".przekresl").length)
                     $("#blad").text("")
+                    $("#alert").removeClass("alert alert-warning")
 
                     wierszlisty.click(function () {
                         wierszlisty.toggleClass("przekresl")
@@ -38,10 +44,14 @@
                     })
                 } else {
                     $("#blad").text("proszę podac nazwę i ilość wiekszą od 0").css("color", "red")
+                    $("#alert").addClass("alert alert-warning")
                 }
 
                 $("#usun").click(function(){
                     $(".przekresl").remove()
+                    $("#licznik").text("do kupienia: " + ($("li").length - $(".przekresl").length) + ", kupione: " + $(".przekresl").length)
+
+                
                 })
             
 
@@ -70,8 +80,10 @@
 
 
     </form>
+    <div id="alert" role="alert">
+            <p id="blad"></p>
+    </div>
 
-    <p id="blad"></p>
     <p id="licznik">do kupienia: 0, kupione: 0</p>
     <button id="usun">usun kupione</button>
     <p id="pusta">lista pusta</p>
