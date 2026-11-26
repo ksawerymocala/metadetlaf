@@ -21,15 +21,15 @@
 
 
                 if (!(nazwa == "" || ilosc <= 0)) {
-                    let wierszlisty = $("<li>" + nazwa + " - " + ilosc + "szt.</li>")
-                    let guzik = $("<button>Usuń</button>")
+                    let wierszlisty = $("<li class='list-group-item'>" + nazwa + " - " + ilosc + "szt.</li>")
+                    let guzik = $("<button class='btn btn-outline-danger usun'>Usuń</button>")
                     guzik.click(function () {
                         wierszlisty.remove()
                         $("#licznik").text("do kupienia: " + ($("li").length - $(".przekresl").length) + ", kupione: " + $(".przekresl").length)
 
-                        if($("li").length == 0){
-                    $("#pusta").text("lista pusta")
-                }
+                        if ($("li").length == 0) {
+                            $("#pusta").text("lista pusta")
+                        }
                     })
                     wierszlisty.append(guzik)
                     $("#lista").append(wierszlisty)
@@ -47,47 +47,94 @@
                     $("#alert").addClass("alert alert-warning")
                 }
 
-                $("#usun").click(function(){
+                $("#usun").click(function () {
                     $(".przekresl").remove()
                     $("#licznik").text("do kupienia: " + ($("li").length - $(".przekresl").length) + ", kupione: " + $(".przekresl").length)
 
-                
+
                 })
-            
+                
+
 
             })
-
+            
 
 
         });
     </script>
     <style>
+        body{
+            background-color: rgb(210, 223, 243);
+        }
         .przekresl {
             color: gray;
             text-decoration: line-through;
         }
+
+        .heder {
+            background-color: rgb(14, 48, 122);
+            border-radius: 7px;
+        }
+
+        .tlo{
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+            border: 1px solid rgb(175, 196, 202);
+        }
+        .ostatnizlisty{
+            margin-bottom: 50px;
+        }
+        .usun{
+            float: right;
+        }
+
     </style>
 </head>
 
 <body>
-    <h1>Lista Zakupów</h1>
-    <form id="formularz">
-        <input type="text" id="nazwa" placeholder="Wpisz nazwę">
+    <div class="container-fluid">
+        <div class="row text-light p-3 m-3 heder">
+            <h1>Lista Zakupów</h1>
+        </div>
 
-        <input type="number" id="ilosc" placeholder="ilosc">
+        <div class="row">
+            <div class="col-5 ">
+                <div class="row m-3 tlo">
 
-        <button type="submit">Dodaj</button>
+                    <p id="licznik" class="mt-2 text-center">do kupienia: 0, kupione: 0</p>
+                    <button class="btn btn-danger w-50 mx-auto mb-3" id="usun">Usuń kupione</button>
+                </div>
+                <div class="row m-3 tlo">
+                    <form id="formularz">
+                        <input class="m-2" type="text" id="nazwa" placeholder="Nazwa produktu">
+
+                        <input class="m-2" type="number" id="ilosc" placeholder="Ilosc">
+
+                        <button class="btn btn-primary m-2" type="submit">Dodaj</button>
+
+                        <div id="alert" role="alert">
+                            <p id="blad"></p>
+                        </div>
 
 
-    </form>
-    <div id="alert" role="alert">
-            <p id="blad"></p>
+                    </form>
+                </div>
+            </div>
+            <div class="col-6 m-3 tlo">
+                
+                <h3 id="pusta" class="text-center">Lista jest pusta</h3>
+                <ul class="list-group pb-3" id="lista"></ul>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
     </div>
-
-    <p id="licznik">do kupienia: 0, kupione: 0</p>
-    <button id="usun">usun kupione</button>
-    <p id="pusta">lista pusta</p>
-    <ul id="lista"></ul>
 </body>
 
 </html>
